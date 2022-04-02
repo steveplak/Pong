@@ -8,8 +8,8 @@ public class Ball {
 	public static final int SIZE = 16;
 
 	public double x, y;
-	private double xVel = 0.9, yVel;
-	private int speed = 1;
+	private double xVel = 0.6, yVel;
+	private int speed = 10;
 
 	public Ball() {
 		reset();
