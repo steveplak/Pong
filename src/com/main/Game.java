@@ -23,7 +23,10 @@ public class Game extends Canvas implements Runnable {
 	private Paddle paddle1;
 	private Paddle paddle2;
 
-	public MainMenu menu;
+	public MainMenu mainMenu;
+	public PlayMenu playMenu;
+	public Difficulty difficultyMenu;
+	
 	
 	public Game() {
 
@@ -34,8 +37,8 @@ public class Game extends Canvas implements Runnable {
 		initialize();
 		
 		this.addKeyListener(new KeyInput(paddle1, paddle2));
-		this.addMouseListener(menu);
-		this.addMouseMotionListener(menu);
+		this.addMouseListener(mainMenu);
+		this.addMouseMotionListener(mainMenu);
 		this.setFocusable(true);
 
 	}
@@ -46,8 +49,10 @@ public class Game extends Canvas implements Runnable {
 		paddle1 = new Paddle(Color.green, true);
 		paddle2 = new Paddle(Color.red, false);
 		
-		menu = new MainMenu(this);
-
+		mainMenu = new MainMenu(this);
+		playMenu = new PlayMenu(this);
+		difficultyMenu = new Difficulty(this);
+		
 	}
 
 	private void canvasSetup() {
@@ -99,8 +104,12 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = buffer.getDrawGraphics();
 
 		drawBackground(g);
-			if (menu.active)
-				menu.draw(g);
+			if (mainMenu.active)
+				mainMenu.draw(g);
+			if (playMenu.active)
+				playMenu.draw(g);
+			if (difficultyMenu.active)
+				difficultyMenu.draw(g);
 		ball.draw(g);
 
 		paddle1.draw(g);
@@ -122,7 +131,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void update() {
-		if(!menu.active) {
+		if(!mainMenu.active && !playMenu.active && !difficultyMenu.active) {
 			ball.update(paddle1, paddle2);
 			
 			paddle1.update(ball);

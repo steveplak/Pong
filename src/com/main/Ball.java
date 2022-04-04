@@ -8,8 +8,8 @@ public class Ball {
 	public static final int SIZE = 16;
 
 	public double x, y;
-	private double xVel = 0.6, yVel;
-	private int speed = 10;
+	private double xVel = 0.3, yVel = 0.3;
+	private int speed = 5;
 
 	public Ball() {
 		reset();
@@ -22,8 +22,7 @@ public class Ball {
 		// xVel = Math.sin(Math.random() * 2.0 - 1.0);
 		// xVel = Game.clampAbs(xVel, 0.2, 1.0);
 		xVel = -xVel;
-		yVel = Math.sin(Math.random() * 2.0 - 1.0);
-
+		yVel = Math.sin(Math.random() * 2.0 - 1.0) % 0.4;
 	}
 
 	public void changeYDir() {

@@ -8,7 +8,7 @@ public class Paddle {
 
 	private double x, y;
 	private double vel = 0;
-	private double speed = 10;
+	private double speed = 2;
 	private int width = 22, height = 85;
 	private int score = 0;
 	private Color color;
