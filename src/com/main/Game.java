@@ -16,6 +16,10 @@ public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = WIDTH * 9 / 16;
 
+	enum Difficulty {
+	    Easy, Medium, Hard
+	}
+	
 	public boolean running = false;
 	private Thread gameThread;
 
@@ -25,7 +29,8 @@ public class Game extends Canvas implements Runnable {
 
 	public MainMenu mainMenu;
 	public PlayMenu playMenu;
-	public Difficulty difficultyMenu;
+	public DifficultyMenu difficultyMenu;
+	public Difficulty difficulty;
 	
 	
 	public Game() {
@@ -51,7 +56,8 @@ public class Game extends Canvas implements Runnable {
 		
 		mainMenu = new MainMenu(this);
 		playMenu = new PlayMenu(this);
-		difficultyMenu = new Difficulty(this);
+		difficultyMenu = new DifficultyMenu(this);
+		
 		
 	}
 

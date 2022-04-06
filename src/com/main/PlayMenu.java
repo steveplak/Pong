@@ -85,7 +85,7 @@ public class PlayMenu extends MouseAdapter {
 		if (pvcBtn.contains(p)) {
 			active = false;
 			
-			game.difficultyMenu = new Difficulty(game);
+			game.difficultyMenu = new DifficultyMenu(game);
 			game.difficultyMenu.active = true;
 			game.addMouseListener(game.difficultyMenu);
 			game.addMouseMotionListener(game.difficultyMenu);

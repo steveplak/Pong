@@ -1,6 +1,7 @@
 package com.main;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,8 +9,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import com.main.Game.Difficulty;
 
-public class Difficulty extends MouseAdapter {
+public class DifficultyMenu extends MouseAdapter {
 	public boolean active;
 
 	private Rectangle eBtn;
@@ -27,7 +29,8 @@ public class Difficulty extends MouseAdapter {
 	private Font font;
 
 	Game game;
-	public Difficulty(Game g) {
+
+	public DifficultyMenu(Game g) {
 		game = g;
 		game.start();
 		active = false;
@@ -38,13 +41,13 @@ public class Difficulty extends MouseAdapter {
 		h = 150;
 
 		y = Game.HEIGHT / 2 - h / 2;
-		x = Game.WIDTH  / 4 - w + 30;
+		x = Game.WIDTH / 4 - w + 30;
 		eBtn = new Rectangle(x, y, w, h);
 
 		x = Game.WIDTH * 2 / 4 - w / 2 - 65;
 		mBtn = new Rectangle(x, y, w + 130, h);
 
-		x = Game.WIDTH *3 / 4 - 30;
+		x = Game.WIDTH * 3 / 4 - 30;
 		hBtn = new Rectangle(x, y, w, h);
 
 		font = new Font("Roboto", Font.PLAIN, 100);
@@ -101,16 +104,17 @@ public class Difficulty extends MouseAdapter {
 
 	}
 
-	public void  mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		Point p = e.getPoint();
-		
-		if(eBtn.contains(p)) {
-			active = false;
-			
-			
-		}
+
+		if (eBtn.contains(p))
+			game.difficulty = Difficulty.Easy;
+
 		else if (mBtn.contains(p))
-			System.exit(0);
+			game.difficulty = Difficulty.Medium;
+
+		else if (hBtn.contains(p))
+			game.difficulty = Difficulty.Hard;
 	}
 
 	public void mouseMoved(MouseEvent e) {
