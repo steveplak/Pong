@@ -3,6 +3,7 @@ package com.main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Paddle {
 
@@ -13,7 +14,9 @@ public class Paddle {
 	private int score = 0;
 	private Color color;
 	private boolean left;
-
+	
+	Game game;
+	
 	public Paddle(Color c, boolean left) {
 		color = c;
 
@@ -48,18 +51,36 @@ public class Paddle {
 	}
 
 	public void update(Ball b) {
-		y = Game.clamp(y += vel, 0, Game.HEIGHT - height);
+		y = Game.clamp(y + vel, 0, Game.HEIGHT - height);
 
 		if (left) {
 			if (b.x <= width && b.y + b.SIZE >= y && b.y <= y + height) {
 				b.changeXDir();
 			}
-
 		} else {
-
 			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height)
 				b.changeXDir();
+		}
+	}
+	
+	public void updateCPU(Ball b, Game g) {
+		switch (g.difficulty) {
+		case Easy: vel = 0.3; break;
+		case Medium: vel = 1; break;
+		case Hard: vel = 2; break;
+		}
 
+		if (b.y < y) vel = -Math.abs(vel);
+		else if (b.y > y) vel = Math.abs(vel);
+		y = Game.clamp(y + vel, 0, Game.HEIGHT - height);
+		
+		if (left) {
+			if (b.x <= width && b.y + b.SIZE >= y && b.y <= y + height) {
+				b.changeXDir();
+			}
+		} else {
+			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height)
+				b.changeXDir();
 		}
 	}
 

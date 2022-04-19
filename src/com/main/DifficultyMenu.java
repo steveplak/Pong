@@ -107,14 +107,25 @@ public class DifficultyMenu extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		Point p = e.getPoint();
 
-		if (eBtn.contains(p))
+		if (eBtn.contains(p)) {
 			game.difficulty = Difficulty.Easy;
-
-		else if (mBtn.contains(p))
+			game.mode = Game.Mode.PVC;
+			game.removeMouseListener(this);
+			game.removeMouseMotionListener(this);
+			active = false;
+		} else if (mBtn.contains(p)) {
 			game.difficulty = Difficulty.Medium;
-
-		else if (hBtn.contains(p))
+			game.mode = Game.Mode.PVC;
+			game.removeMouseListener(this);
+			game.removeMouseMotionListener(this);
+			active = false;
+		} else if (hBtn.contains(p)) {
 			game.difficulty = Difficulty.Hard;
+			game.mode = Game.Mode.PVC;
+			game.removeMouseListener(this);
+			game.removeMouseMotionListener(this);
+			active = false;
+		}
 	}
 
 	public void mouseMoved(MouseEvent e) {

@@ -17,9 +17,13 @@ public class Game extends Canvas implements Runnable {
 	public static final int HEIGHT = WIDTH * 9 / 16;
 
 	enum Difficulty {
-	    Easy, Medium, Hard
+		Easy, Medium, Hard
 	}
-	
+
+	enum Mode {
+		Inactive, PVP, PVC
+	}
+
 	public boolean running = false;
 	private Thread gameThread;
 
@@ -31,16 +35,16 @@ public class Game extends Canvas implements Runnable {
 	public PlayMenu playMenu;
 	public DifficultyMenu difficultyMenu;
 	public Difficulty difficulty;
-	
-	
+	public Mode mode = Mode.Inactive;
+
 	public Game() {
 
 		canvasSetup();
-	
+
 		new Window("SimplePong", this);
-		
+
 		initialize();
-		
+
 		this.addKeyListener(new KeyInput(paddle1, paddle2));
 		this.addMouseListener(mainMenu);
 		this.addMouseMotionListener(mainMenu);
@@ -53,12 +57,11 @@ public class Game extends Canvas implements Runnable {
 		ball = new Ball();
 		paddle1 = new Paddle(Color.green, true);
 		paddle2 = new Paddle(Color.red, false);
-		
+
 		mainMenu = new MainMenu(this);
 		playMenu = new PlayMenu(this);
 		difficultyMenu = new DifficultyMenu(this);
-		
-		
+
 	}
 
 	private void canvasSetup() {
@@ -73,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 		this.requestFocus();
 
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 9999.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
@@ -110,12 +113,12 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = buffer.getDrawGraphics();
 
 		drawBackground(g);
-			if (mainMenu.active)
-				mainMenu.draw(g);
-			if (playMenu.active)
-				playMenu.draw(g);
-			if (difficultyMenu.active)
-				difficultyMenu.draw(g);
+		if (mainMenu.active)
+			mainMenu.draw(g);
+		if (playMenu.active)
+			playMenu.draw(g);
+		if (difficultyMenu.active)
+			difficultyMenu.draw(g);
 		ball.draw(g);
 
 		paddle1.draw(g);
@@ -135,15 +138,32 @@ public class Game extends Canvas implements Runnable {
 		g2d.setStroke(dashed);
 		g2d.drawLine(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
 	}
+	
+	public void runPVP() {
+		ball.update(paddle1, paddle2);
+
+		paddle1.update(ball);
+		paddle2.update(ball);
+	}
+	
+	public void runPVC() {
+		ball.update(paddle1, paddle2);
+
+		paddle1.updateCPU(ball, this);
+		paddle2.updateCPU(ball, this);
+	}
 
 	private void update() {
-		if(!mainMenu.active && !playMenu.active && !difficultyMenu.active) {
-			ball.update(paddle1, paddle2);
-			
-			paddle1.update(ball);
-			paddle2.update(ball);
+		switch (mode) {
+		case Inactive:
+			break;
+		case PVP:
+			runPVP();
+			break;
+		case PVC:
+			runPVC();
+			break;
 		}
-
 	}
 
 	public void start() {
@@ -195,7 +215,5 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String[] args) {
 		new Game();
 	}
-
-	
 
 }

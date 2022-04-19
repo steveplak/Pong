@@ -93,6 +93,7 @@ public class PlayMenu extends MouseAdapter {
 			game.removeMouseListener(this);
 			game.removeMouseMotionListener(this);
 		} else if (pvpBtn.contains(p)) {
+			game.mode = Game.Mode.PVP;
 			active = false;
 		}
 	}
