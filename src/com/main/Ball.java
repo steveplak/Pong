@@ -8,7 +8,7 @@ public class Ball {
 	public static final int SIZE = 16;
 
 	public double x, y;
-	private double xVel = 0.3, yVel = 0.3;
+	public double xVel = 0.3, yVel = 0.3;
 	private int speed = 5;
 
 	public Ball() {

@@ -56,10 +56,13 @@ public class Paddle {
 		if (left) {
 			if (b.x <= width && b.y + b.SIZE >= y && b.y <= y + height) {
 				b.changeXDir();
+				b.yVel = Math.sin(Math.random() * 2.0 - 1.0) % 0.4;
 			}
 		} else {
-			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height)
+			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height) {
 				b.changeXDir();
+				b.yVel = Math.sin(Math.random() * 2.0 - 1.0) % 0.4;
+			}
 		}
 	}
 	
@@ -77,10 +80,13 @@ public class Paddle {
 		if (left) {
 			if (b.x <= width && b.y + b.SIZE >= y && b.y <= y + height) {
 				b.changeXDir();
+				
 			}
 		} else {
-			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height)
+			if (b.x + b.SIZE >= Game.WIDTH - width && b.y + b.SIZE >= y && b.y <= y + height) {
 				b.changeXDir();
+			
+			}
 		}
 	}
 
