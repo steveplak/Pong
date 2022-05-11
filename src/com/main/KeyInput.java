@@ -15,6 +15,7 @@ public class KeyInput extends KeyAdapter{
 	private boolean up2 = false;
 	private boolean down2 = false;
 	
+
 	public KeyInput(Paddle pd1, Paddle pd2) {
 		p1 = pd1;
 		p2 = pd2;
@@ -44,7 +45,8 @@ public class KeyInput extends KeyAdapter{
 	
 	
 	
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent e, Game g) {
+		
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_UP) {

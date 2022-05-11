@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	public boolean running = false;
 	private Thread gameThread;
 
-	private Ball ball;
+	public Ball ball;
 	private Paddle paddle1;
 	private Paddle paddle2;
 

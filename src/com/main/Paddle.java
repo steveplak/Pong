@@ -28,6 +28,11 @@ public class Paddle {
 
 	public void addPoint() {
 		score++;
+		if(score > 3){
+			System.out.print("first statement. ");  
+			GameOver(game.ball);
+			
+		}
 	}
 
 	public void draw(Graphics g) {
@@ -97,5 +102,10 @@ public class Paddle {
 	
 	public void stop() {
 		vel = 0;
+		
+	}
+	public void GameOver(Ball b) {
+		b.xVel = 0;
+		b.yVel = 0;
 	}
 }
